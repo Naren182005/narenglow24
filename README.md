@@ -1,69 +1,92 @@
-# Welcome to your Lovable project
 
-## Project info
+# Glow24 Organics - Full Stack Application
 
-**URL**: https://lovable.dev/projects/bdcb6110-4160-4381-a7c9-350dcb2450d5
+This project consists of a React frontend and an Express backend server for the Glow24 Organics e-commerce application.
 
-## How can I edit this code?
+## Project Structure
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/bdcb6110-4160-4381-a7c9-350dcb2450d5) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+/
+├── src/                  # Frontend React application
+├── server/               # Backend Express server
+│   ├── index.js          # Server entry point
+│   ├── routes/           # API routes
+│   │   ├── products.js   # Products API
+│   │   └── orders.js     # Orders API
+│   └── package.json      # Server dependencies
+├── .env                  # Environment variables for frontend
+└── server/.env           # Environment variables for backend
 ```
 
-**Edit a file directly in GitHub**
+## Setup Instructions
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 1. Install Frontend Dependencies
+```bash
+npm install
+```
 
-**Use GitHub Codespaces**
+### 2. Install Backend Dependencies
+```bash
+cd server
+npm install
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### 3. Set Up Environment Variables
+- Frontend (.env in root directory):
+  ```
+  VITE_API_URL=http://localhost:5000
+  ```
+- Backend (server/.env):
+  ```
+  PORT=5000
+  ```
 
-## What technologies are used for this project?
+## Running the Application
 
-This project is built with .
+### Development Mode
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+#### Option 1: Run Frontend and Backend Separately
+1. Start the backend server:
+   ```bash
+   cd server
+   npm start
+   ```
+2. In a new terminal, start the frontend:
+   ```bash
+   npm run dev
+   ```
 
-## How can I deploy this project?
+#### Option 2: Run Both Concurrently
+Use the provided script to run both frontend and backend concurrently:
+```bash
+node run-dev.js
+```
 
-Simply open [Lovable](https://lovable.dev/projects/bdcb6110-4160-4381-a7c9-350dcb2450d5) and click on Share -> Publish.
+### Production Deployment
 
-## I want to use a custom domain - is that possible?
+1. Build the frontend:
+   ```bash
+   npm run build
+   ```
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+2. Set up a production server to:
+   - Serve the Express backend
+   - Serve the static files from the `dist` directory
+
+## API Endpoints
+
+### Products
+- `GET /api/products` - Get all products
+- `GET /api/products/:id` - Get product by ID
+
+### Orders
+- `POST /api/orders` - Create a new order
+- `GET /api/orders/:orderId/track` - Get tracking information for an order
+- `PUT /api/orders/:orderId/status` - Update order status
+
+## Troubleshooting
+
+If you encounter issues with package installation:
+- Make sure you're using a compatible Node.js version (v14+ recommended)
+- If specific packages fail to build, try using npm instead of Bun for installation
+- Clear node_modules and package-lock.json before reinstalling dependencies
